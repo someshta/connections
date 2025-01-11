@@ -104,15 +104,12 @@ let correctCategories = [
     }
 ];
 
-//Dom elements
 let tileContainer = document.getElementById("tile-container");
 let correctContainer = document.getElementById("correct");
 let deselectBtn = document.getElementById("deselect");
 let shuffleBtn = document.getElementById("shuffle");
 let submitBtn = document.getElementById("submit");
-
 let maxSelections = 4; // Maximum number of items that can be selected
-let correctTiles = [];
 
 //Limits selection to 4 boxes
 const limitCheckboxes = () => {
@@ -121,7 +118,15 @@ const limitCheckboxes = () => {
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', () => {
         const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
-  
+        if(checkedCount > 0) {
+            deselectBtn.disabled = false;
+        }
+        if(checkedCount === maxSelections) {
+            submitBtn.disabled = false;
+        }
+        if(checkedCount < maxSelections) {
+            submitBtn.disabled = true;
+        }
         if (checkedCount > maxSelections) {
           checkbox.checked = false; // Undo the check
           alert(`You can only select up to ${maxSelections} options.`);
@@ -137,6 +142,7 @@ const deselectAll = (tiles) => {
             tile.checked = false;
         }
     })
+    deselectBtn.disabled = true;
 }
 
 //Handles checking if correct
@@ -164,6 +170,7 @@ const checkConnection = (array) => {
         moveCorrect(array);
         deselectAll(array);
         uiTiles = document.querySelectorAll("#tile-container .tile");
+        submitBtn.disabled = true;
     } else if (maxShared === 3) {
         alert("One away!");
     } else {
