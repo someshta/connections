@@ -12,8 +12,21 @@
 <body>
     <div class="game">
         <h1>Create groups of four!</h1>
-        <div id="correct"></div>
-        <div id="tile-container" class="items-wrapper"></div>
+        <div class="tile-correct-wrapper">
+            <div id="correct">
+                <div class="pop-up" id="you-lose">You lose!</div>
+            </div>
+            <div id="tile-container" class="items-wrapper"></div>
+            <div class="pop-up" id="one-away">One away!</div>
+            <div class="pop-up" id="limit">Four is the limit!</div>
+        </div>
+        <div class="guesses-wrapper">
+            <p class="guesses-left">Guesses remaining:</p>
+            <div class="dot" id="guess1"></div>
+            <div class="dot" id="guess2"></div>
+            <div class="dot" id="guess3"></div>
+            <div class="dot" id="guess4"></div>
+        </div>
         <div class="buttons-wrapper">
             <button id="shuffle">Shuffle</button>
             <button disabled id="deselect">Deselect all</button>
